@@ -10,11 +10,11 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="WHO'S YOUR STORY? — あなたはどの作家タイプ？">
 <meta property="og:description" content="宮崎駿？村上春樹？鳥山明？ YES/NOで進む、8タイプの作家診断。">
-<meta property="og:image" content="__PUBLIC_BASE_URL__/share_cards/default.png">
+<meta property="og:image" content="https://korea-x-won.github.io/whos-your-story/share_cards/r40.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="WHO'S YOUR STORY? — あなたはどの作家タイプ？">
 <meta name="twitter:description" content="宮崎駿？村上春樹？鳥山明？ YES/NOで進む、8タイプの作家診断。">
-<meta name="twitter:image" content="__PUBLIC_BASE_URL__/share_cards/default.png">
+<meta name="twitter:image" content="https://korea-x-won.github.io/whos-your-story/share_cards/r40.jpg">
 
 <style>
 :root{
@@ -184,13 +184,11 @@ function cleanBaseUrl(){
   return u.href.replace(/\/index\.html$/,'/');
 }
 function sharePageUrl(id){
-  const u=new URL(cleanBaseUrl());
-  u.searchParams.set('result',id);
-  return u.href;
+  return new URL(`share/${id}.html`, cleanBaseUrl()).href;
 }
 function renderResult(id,shared=false){
  const r=results[id];statusEl.textContent=shared?'SHARED RESULT':'RESULT';
- screen.className='screen fade';screen.innerHTML=`${shared?'<div class="sharedBadge">SHARED RESULT — 友だちの診断結果</div>':''}<div class="resultGrid"><div class="portrait"><img src="${art[r.phase]}" alt="${esc(r.author)}"></div><div><div class="kicker">YOUR STORY TYPE</div><div class="phase">${r.phase}</div><div class="chartTag">${esc(r.detailTag)}</div><div class="author">${esc(r.author)}</div><p class="desc">${esc(r.desc)}</p><div class="recTitle">オススメの物語</div><div class="recs">${r.recs.map(x=>`<span class="rec">『${esc(x)}』</span>`).join('')}</div></div></div><div class="resultBtns"><button class="xshare" onclick="shareX('${id}')">𝕏 で結果をシェア</button><button class="linkcopy" onclick="copyShareLink('${id}')">共有リンクをコピー</button><button class="primary" onclick="copyResult('${id}')">結果文をコピー</button><button class="secondary" onclick="startGame()">${shared?'あなたも診断する':'もう一度診断'}</button></div>${shared?'':`<details class="route"><summary>今回の回答ルート</summary>${routeHTML()}</details>`}<div class="allTypes"><h3>ALL 8 TYPES</h3>${castHTML('typeGrid')}</div><div class="note">※見出し・説明文・おすすめ作品は詳細説明資料の表記を使用しています。</div>
+ screen.className='screen fade';screen.innerHTML=`${shared?'<div class="sharedBadge">SHARED RESULT — 友だちの診断結果</div>':''}<div class="resultGrid"><div class="portrait"><img src="${art[r.phase]}" alt="${esc(r.author)}"></div><div><div class="kicker">YOUR STORY TYPE</div><div class="phase">${r.phase}</div><div class="chartTag">${esc(r.detailTag)}</div><div class="author">${esc(r.author)}</div><p class="desc">${esc(r.desc)}</p><div class="recTitle">オススメの物語</div><div class="recs">${r.recs.map(x=>`<span class="rec">『${esc(x)}』</span>`).join('')}</div></div></div><div class="resultBtns"><button class="xshare" onclick="shareX('${id}')">𝕏 で結果をシェア</button><button class="linkcopy" onclick="saveResultImage('${id}')">結果画像を保存</button><button class="linkcopy" onclick="copyShareLink('${id}')">共有リンクをコピー</button><button class="primary" onclick="copyResult('${id}')">結果文をコピー</button><button class="secondary" onclick="startGame()">${shared?'あなたも診断する':'もう一度診断'}</button></div>${shared?'':`<details class="route"><summary>今回の回答ルート</summary>${routeHTML()}</details>`}<div class="allTypes"><h3>ALL 8 TYPES</h3>${castHTML('typeGrid')}</div><div class="note">※見出し・説明文・おすすめ作品は詳細説明資料の表記を使用しています。</div>
 <div class="feedbackBox">
   <details>
     <summary>この診断への感想・改善案があれば</summary>
@@ -200,6 +198,17 @@ function renderResult(id,shared=false){
     </div>
   </details>
 </div>`;
+}
+async function saveResultImage(id){
+ try{
+  const response=await fetch(new URL(`share_cards/${id}.jpg`,cleanBaseUrl()));
+  if(!response.ok) throw new Error('Image unavailable');
+  const blob=await response.blob();
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=`whos-your-story-${id}.jpg`;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),10000);
+ }catch(e){alert('画像を保存できませんでした。少し待ってから再度お試しください。');}
 }
 function shareText(id){
  const r=results[id];
