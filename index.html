@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d0f17">
+<title>WHO'S YOUR STORY? — あなたはどの作家タイプ？</title>
+
+<meta name="description" content="WHO'S YOUR STORY? あなたは宮崎駿？村上春樹？鳥山明？ YES/NOで進む作家タイプ診断ゲーム。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WHO'S YOUR STORY? — あなたはどの作家タイプ？">
+<meta property="og:description" content="宮崎駿？村上春樹？鳥山明？ YES/NOで進む、8タイプの作家診断。">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WHO'S YOUR STORY? — あなたはどの作家タイプ？">
+<meta name="twitter:description" content="宮崎駿？村上春樹？鳥山明？ YES/NOで進む、8タイプの作家診断。">
+<style>
+:root{
+  --bg:#090b10;--bg2:#111521;--paper:#f7f1e7;--ink:#17191f;--muted:#8d93a2;
+  --gold:#e9ba52;--gold2:#fff0b7;--red:#e94b52;--blue:#4d77e6;--line:#262c3a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:#f7f7fb;font-family:Inter,"Noto Sans JP","Yu Gothic",system-ui,sans-serif}
+body{overflow-x:hidden;background:
+ radial-gradient(circle at 15% 0%,rgba(77,119,230,.15),transparent 28rem),
+ radial-gradient(circle at 92% 90%,rgba(233,186,82,.11),transparent 34rem),#090b10}
+button{font:inherit}
+.app{min-height:100vh;display:flex;flex-direction:column}
+.shell{width:min(1040px,100%);margin:auto;padding:20px clamp(16px,4vw,38px) 34px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.logo{font-size:13px;letter-spacing:.18em;font-weight:900;color:var(--gold2)}
+.status{font-size:12px;color:#aab0bf;border:1px solid #303747;border-radius:999px;padding:7px 11px;background:#10141d}
+.panel{background:linear-gradient(160deg,rgba(23,28,41,.96),rgba(13,16,24,.98));border:1px solid #2b3140;border-radius:28px;box-shadow:0 28px 100px #0008;overflow:hidden}
+.screen{padding:clamp(26px,5vw,54px)}
+.hero{text-align:center;position:relative}
+.kicker{font-size:12px;letter-spacing:.22em;font-weight:900;color:var(--gold);margin-bottom:14px}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(42px,9vw,86px);line-height:.92;letter-spacing:-.055em;margin:0;color:#fff}
+h1 .q{color:var(--gold)}
+.sub{font-size:clamp(20px,4vw,32px);font-weight:900;margin:18px 0 7px}
+.names{font-family:Georgia,"Yu Mincho",serif;color:#e8dfd1;font-size:clamp(16px,3vw,22px);margin:0 0 20px}
+.lead{max-width:640px;margin:0 auto 24px;color:#aeb5c6;line-height:1.8;font-size:15px}
+.start{border:0;border-radius:16px;background:linear-gradient(135deg,#f5d27a,#d69c2c);color:#171109;font-weight:950;font-size:18px;padding:17px 30px;cursor:pointer;box-shadow:0 10px 30px #d69c2c26;transition:.18s}
+.start:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.cast{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;align-items:end;margin:30px auto 8px;max-width:900px}
+.castCard{height:132px;position:relative;border-radius:14px;overflow:hidden;background:linear-gradient(#181e2a,#10141c);border:1px solid #293040;transition:.2s}
+.castCard img{width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 7px 10px #0007)}
+.castCard span{position:absolute;left:5px;top:5px;font-size:10px;font-weight:900;color:#fff;background:#0008;border-radius:999px;padding:3px 6px}
+.note{font-size:11px;color:#747d90;line-height:1.65;margin-top:16px}
+.questionHead{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.qno{font-family:Georgia,serif;font-size:13px;letter-spacing:.18em;color:var(--gold);font-weight:900}
+.candidates{font-size:12px;color:#9098aa;text-align:right}
+.questionBox{margin:28px 0 22px;padding:clamp(26px,5vw,48px);min-height:210px;display:flex;align-items:center;justify-content:center;text-align:center;border-radius:22px;background:#0a0d14;border:1px solid #2a3141;position:relative;overflow:hidden}
+.questionBox:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 110%,rgba(233,186,82,.09),transparent 55%);pointer-events:none}
+.questionText{font-size:clamp(25px,5vw,42px);line-height:1.45;font-weight:900;letter-spacing:-.02em;position:relative}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.answer{border:0;color:#fff;border-radius:18px;padding:19px 14px;font-weight:950;font-size:20px;cursor:pointer;transition:.16s;box-shadow:inset 0 1px #ffffff24}
+.answer:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.answer small{display:block;font-size:10px;letter-spacing:.15em;opacity:.72;margin-bottom:3px}
+.yes{background:linear-gradient(135deg,#e85259,#b82f42)}
+.no{background:linear-gradient(135deg,#537ee9,#2c55bd)}
+.candidateStrip{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin-top:18px}
+.mini{height:54px;border-radius:9px;background:#10151f;border:1px solid #252d3c;overflow:hidden;opacity:.18;filter:grayscale(1);transition:.25s}
+.mini.alive{opacity:1;filter:none;border-color:#626d84}
+.mini img{width:100%;height:100%;object-fit:contain;object-position:center bottom}
+.controls{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.ghost{border:1px solid #303848;background:transparent;color:#99a2b5;border-radius:12px;padding:10px 13px;cursor:pointer}
+.ghost:disabled{opacity:.28;cursor:default}
+.route{margin-top:18px;border-top:1px solid #262d3b;padding-top:14px}
+.route summary{color:#8f98aa;cursor:pointer;font-size:13px}
+.route ol{padding-left:20px;color:#aeb6c6;font-size:13px;line-height:1.7}
+.resultGrid{display:grid;grid-template-columns:minmax(220px,38%) 1fr;gap:clamp(20px,4vw,42px);align-items:center}
+.portrait{height:430px;display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.09),transparent 38%),#0a0d14;border:1px solid #2a3141;border-radius:24px;overflow:hidden;position:relative}
+.portrait img{width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 16px 18px #0007)}
+.phase{font-family:Georgia,serif;font-size:clamp(68px,12vw,118px);line-height:.8;font-weight:900;color:var(--gold);letter-spacing:-.07em;margin-bottom:18px}
+.chartTag{font-size:clamp(20px,3vw,28px);font-weight:900;color:#d5d8e0;margin-bottom:3px}
+.author{font-size:clamp(28px,5vw,46px);font-weight:1000;line-height:1.15;color:#fff;letter-spacing:-.035em;margin-bottom:12px}
+.detailTag{display:inline-block;color:#15100a;background:#efd07b;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:900;margin-bottom:16px}
+.desc{font-size:15px;line-height:1.9;color:#c4cad7;margin:0 0 20px}
+.recTitle{font-size:12px;letter-spacing:.15em;color:#919bad;font-weight:900;margin-bottom:10px}
+.recs{display:flex;flex-wrap:wrap;gap:8px}
+.rec{padding:8px 11px;border-radius:999px;background:#171c28;border:1px solid #30394b;color:#e8eaf0;font-size:13px}
+.resultBtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.primary,.secondary,.xshare,.linkcopy{border:0;border-radius:14px;padding:14px;font-weight:900;cursor:pointer}
+.primary{background:linear-gradient(135deg,#efd07b,#d8a53b);color:#171109}.secondary{background:#202736;color:#f4f5f8}.xshare{background:#f6f7fb;color:#090b10}.linkcopy{background:#151a24;color:#e6e9f0;border:1px solid #31394a}.sharedBadge{display:inline-block;margin:0 0 18px;padding:7px 11px;border-radius:999px;background:#151b27;border:1px solid #343d50;color:#bfc7d7;font-size:12px;font-weight:900;letter-spacing:.08em}
+.allTypes{margin-top:28px;padding-top:22px;border-top:1px solid #252c39}
+.allTypes h3{font-size:13px;letter-spacing:.13em;color:#8f98aa;margin:0 0 12px}
+.typeGrid{display:grid;grid-template-columns:repeat(8,1fr);gap:7px}
+.typeTile{background:#0d1119;border:1px solid #282f3d;border-radius:12px;padding:7px;text-align:center;min-width:0}
+.typeTile img{width:100%;height:90px;object-fit:contain;object-position:center bottom}
+.typeTile b{display:block;font-size:11px;margin-top:4px}.typeTile span{font-size:9px;color:#8e97a9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.fade{animation:fade .22s ease both}@keyframes fade{from{opacity:.15;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(max-width:760px){.cast{grid-template-columns:repeat(4,1fr)}.castCard{height:112px}.resultGrid{grid-template-columns:1fr}.portrait{height:330px}.typeGrid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:520px){.answers,.resultBtns{grid-template-columns:1fr}.questionBox{min-height:180px}.screen{padding:22px 16px}.candidateStrip{grid-template-columns:repeat(4,1fr)}.mini{height:48px}.castCard{height:105px}.portrait{height:300px}}
+
+.feedbackBox{
+  margin-top:28px;
+  padding-top:18px;
+  border-top:1px solid #252c39;
+  color:#8f98aa;
+  font-size:12px;
+  line-height:1.7;
+}
+.feedbackBox details{
+  background:transparent;
+}
+.feedbackBox summary{
+  cursor:pointer;
+  list-style:none;
+  color:#98a2b5;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.feedbackBox summary::-webkit-details-marker{display:none}
+.feedbackBox summary::before{
+  content:"✦";
+  color:#6f788a;
+  font-size:11px;
+}
+.feedbackInner{
+  margin-top:12px;
+  padding:14px 15px;
+  border:1px solid #2c3443;
+  border-radius:14px;
+  background:#111620;
+}
+.feedbackInner p{
+  margin:0 0 10px;
+  color:#9ca6b8;
+}
+.feedbackPost{
+  appearance:none;
+  border:1px solid #343d4f;
+  background:#171c27;
+  color:#e7eaf0;
+  border-radius:10px;
+  padding:9px 12px;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+.feedbackPost:hover{filter:brightness(1.08)}
+
+</style>
+<link rel="canonical" href="https://korea-x-won.github.io/whos-your-story/">
+</head>
+<body>
+<div class="app"><main class="shell">
+  <div class="top"><div class="logo">STORY PHASE DIAGNOSIS</div><div id="status" class="status">READY</div></div>
+  <section class="panel"><div id="screen" class="screen"></div></section>
+</main></div>
+<script>
+const art={"1.0": "assets/sprite.svg#p10", "1.5": "assets/sprite.svg#p15", "2.0": "assets/sprite.svg#p20", "2.5": "assets/sprite.svg#p25", "3.0": "assets/sprite.svg#p30", "3.5": "assets/sprite.svg#p35", "4.0": "assets/sprite.svg#p40", "4.5": "assets/sprite.svg#p45"};
+const nodes={"q1": {"text": "周囲と同じ行動をしていると安心する", "yes": "qA2", "no": "qB1"}, "qA2": {"text": "赤信号は、車がなくても待つ", "yes": "qA3", "no": "qB3"}, "qA3": {"text": "約束は絶対に守る", "yes": "qA4", "no": "qB4"}, "qA4": {"text": "ルールを破る人を見ると、気になる", "yes": "r15", "no": "r10"}, "qB1": {"text": "映画の分析や解釈が好き", "yes": "qC1", "no": "qB2"}, "qB2": {"text": "勝つためには、手段を選ばないこともある", "yes": "qB3", "no": "qA3"}, "qB3": {"text": "人生、頑張れば何とかなる", "yes": "qB4", "no": "qC4"}, "qB4": {"text": "勉強が分からない相手を見ると、イライラしちゃう", "yes": "r25", "no": "r20"}, "qC1": {"text": "「世界を変えたい」と思うことがある", "yes": "qD1", "no": "qC2"}, "qC2": {"text": "スポーツは、勝てなくてもOK", "yes": "qC3", "no": "qB3"}, "qC3": {"text": "10億円あったら、人生の問題はだいたい解決する", "yes": "qB4", "no": "qC4"}, "qC4": {"text": "やりたいことがある", "yes": "r35", "no": "r30"}, "qD1": {"text": "自分が幸せなら、それで十分", "yes": "qC2", "no": "qD2"}, "qD2": {"text": "嬉しい時、周りの人も嬉しいか気になる", "yes": "qD3", "no": "qC3"}, "qD3": {"text": "自分らしく生きることが、一番大切", "yes": "qC4", "no": "qD4"}, "qD4": {"text": "議論で勝つと、すっきりする", "yes": "r40", "no": "r45"}};
+const results={"r10": {"phase": "1.0", "chartTag": "夢見る", "detailTag": "夢見る", "author": "イソップタイプ", "desc": "世界を素直に信じ、人との関わりやさまざまな経験を通して、善悪や思いやりを学びながら少しずつ成長する物語がぴったり。夢や憧れを育みながら人生を歩み始めます。", "recs": ["となりのトトロ", "ナルニア国物語", "星の王子さま"]}, "r15": {"phase": "1.5", "chartTag": "信念を貫く", "detailTag": "信念を貫く", "author": "三島由紀夫タイプ", "desc": "揺るぎない信念を持ち、その理想を胸に生を貫く物語こそあなたにぴったり。軸がはっきりしていて、迷いが少なく、困難や犠牲を受け入れる覚悟を持ち、主人公の行動に一貫性があります。", "recs": ["鬼滅の刃", "走れメロス", "金閣寺"]}, "r20": {"phase": "2.0", "chartTag": "地元最高！", "detailTag": "地元最高！", "author": "宮藤官九郎タイプ", "desc": "自分のいる世界の不条理や矛盾に気づきながら、それでもその中に居場所を見つけていく物語があなたのタイプ。主人公は努力や挑戦によって、自分の可能性を広げます。", "recs": ["ウォーターボーイズ", "木更津キャッツアイ", "蹴りたい背中"]}, "r25": {"phase": "2.5", "chartTag": "ワクワクすっぞ", "detailTag": "オラ、ワクワクすっぞ！", "author": "鳥山明タイプ", "desc": "努力や工夫によって成長し、困難を克服しつづける物語を愛するあなた。挑戦や強いライバルとの出会いを楽しみ、自ら行動することで人生を切り拓いていきます。", "recs": ["SLAM DUNK", "Breaking Bad", "老人と海"]}, "r30": {"phase": "3.0", "chartTag": "さまよえる", "detailTag": "さまよえる", "author": "村上春樹タイプ", "desc": "人生の成功や社会の正解を手に入れても、どこか満たされないあなた。「何のために生きるのか」を探し続ける作品がふさわしい。哲学や文学を通して、自分の世界観を模索していきます。", "recs": ["ブラザーフッド", "ねじまき鳥クロニクル", "夜と霧"]}, "r35": {"phase": "3.5", "chartTag": "海路を拓く", "detailTag": "海路を切り拓く", "author": "尾田栄一郎タイプ", "desc": "誰かが用意した地図を歩くのではなく、自分だけの航路を選ぶ物語があなたらしい。「自分はどう生きたいのか」を判断基準に失敗も成功も引き受けながら前へ前へと進みます。", "recs": ["ONE PIECE", "カウボーイビバップ", "未生"]}, "r40": {"phase": "4.0", "chartTag": "生きろ！", "detailTag": "とにかく、生きろ！", "author": "宮崎駿タイプ", "desc": "自分らしい生き方を見つけるだけでは満足できず、仲間と協力しながら「未来のために何ができるのか」を考えさせる物語があなたのタイプ。主人公は苦しくても理想の実現に向けて行動します。", "recs": ["もののけ姫", "君たちはどう生きるか", "レ・ミゼラブル"]}, "r45": {"phase": "4.5", "chartTag": "涅槃を見せよう", "detailTag": "涅槃を見たい！", "author": "神山健治タイプ", "desc": "多様な価値観が共存する物語をあなたは求めています。自分の価値観だけを絶対視せず、相手の価値観も尊重し、対話を通じてより良い未来を築こうとします。", "recs": ["攻殻機動隊 S.A.C.", "東のエデン", "葬送のフリーレン", "モモ"]}};
+const reach={"q1": ["r10", "r15", "r20", "r25", "r30", "r35", "r40", "r45"], "qA2": ["r10", "r15", "r20", "r25", "r30", "r35"], "qA3": ["r10", "r15", "r20", "r25"], "qA4": ["r10", "r15"], "qB1": ["r10", "r15", "r20", "r25", "r30", "r35", "r40", "r45"], "qB2": ["r10", "r15", "r20", "r25", "r30", "r35"], "qB3": ["r20", "r25", "r30", "r35"], "qB4": ["r20", "r25"], "qC1": ["r20", "r25", "r30", "r35", "r40", "r45"], "qC2": ["r20", "r25", "r30", "r35"], "qC3": ["r20", "r25", "r30", "r35"], "qC4": ["r30", "r35"], "qD1": ["r20", "r25", "r30", "r35", "r40", "r45"], "qD2": ["r20", "r25", "r30", "r35", "r40", "r45"], "qD3": ["r30", "r35", "r40", "r45"], "qD4": ["r40", "r45"]};
+const resultOrder=['r10','r15','r20','r25','r30','r35','r40','r45'];
+let current='q1',history=[];
+const screen=document.getElementById('screen'),statusEl=document.getElementById('status');
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function castHTML(cls='cast'){
+ return `<div class="${cls}">`+resultOrder.map(id=>{const r=results[id];return `<div class="${cls==='cast'?'castCard':'typeTile'}">${cls==='cast'?`<span>${r.phase}</span>`:''}<img src="${art[r.phase]}" alt="${esc(r.author)}">${cls!=='cast'?`<b>${r.phase}</b><span>${esc(r.author.replace('タイプ',''))}</span>`:''}</div>`}).join('')+`</div>`;
+}
+function startScreen(){
+ current='q1';history=[];statusEl.textContent='READY';
+ screen.className='screen fade';screen.innerHTML=`<div class="hero"><div class="kicker">物語フェーズ診断ゲーム</div><h1>WHO'S YOUR <span class="q">STORY?</span></h1><div class="sub">あなたはどの作家タイプ？</div><p class="names">宮崎駿？ 村上春樹？ 鳥山明？</p><p class="lead">いくつかの問いに YES / NO で答えてください。あなたのものの見方に近い「作家タイプ」を、8つの物語フェーズから診断します。</p><button class="start" onclick="startGame()">診断をはじめる</button>${castHTML()}<div class="note">※これは物語フェーズモデルを使ったエンターテインメント診断です。心理検査・医学的評価ではありません。</div></div>`;
+}
+function startGame(){current='q1';history=[];renderQuestion();}
+function candidateHTML(ids){return `<div class="candidateStrip">`+resultOrder.map(id=>`<div class="mini ${ids.includes(id)?'alive':''}" title="${esc(results[id].author)}"><img src="${art[results[id].phase]}" alt=""></div>`).join('')+`</div>`;}
+function routeHTML(){return `<ol>`+history.map(h=>`<li>${esc(h.q)} → <b style="color:${h.a==='YES'?'var(--red)':'var(--blue)'}">${h.a}</b></li>`).join('')+`</ol>`;}
+function renderQuestion(){
+ const n=nodes[current],cand=reach[current]||[];statusEl.textContent=`Q${history.length+1}`;
+ screen.className='screen fade';screen.innerHTML=`<div class="questionHead"><div class="qno">QUESTION ${String(history.length+1).padStart(2,'0')}</div><div class="candidates">候補作家 <b>${cand.length}</b> / 8</div></div><div class="questionBox"><div class="questionText">${esc(n.text)}</div></div><div class="answers"><button class="answer yes" onclick="answer(true)"><small>YES</small>そう思う</button><button class="answer no" onclick="answer(false)"><small>NO</small>そうは思わない</button></div>${candidateHTML(cand)}<div class="controls"><button class="ghost" onclick="undo()" ${history.length===0?'disabled':''}>← ひとつ戻る</button><button class="ghost" onclick="startScreen()">タイトルへ</button></div>${history.length?`<details class="route"><summary>回答ルートを見る</summary>${routeHTML()}</details>`:''}`;
+}
+function answer(isYes){const n=nodes[current];history.push({id:current,q:n.text,a:isYes?'YES':'NO'});const next=isYes?n.yes:n.no;if(next.startsWith('r'))renderResult(next);else{current=next;renderQuestion();}}
+function undo(){if(!history.length)return;const h=history.pop();current=h.id;renderQuestion();}
+function cleanBaseUrl(){
+  const u=new URL(location.href);
+  u.search='';
+  u.hash='';
+  return u.href.replace(/\/index\.html$/,'/');
+}
+function sharePageUrl(id){ const u=new URL(cleanBaseUrl()); u.searchParams.set('result',id); return u.href; }
+function renderResult(id,shared=false){
+ const r=results[id];statusEl.textContent=shared?'SHARED RESULT':'RESULT';const diff=r.chartTag!==r.detailTag;
+ screen.className='screen fade';screen.innerHTML=`${shared?'<div class="sharedBadge">SHARED RESULT — 友だちの診断結果</div>':''}<div class="resultGrid"><div class="portrait"><img src="${art[r.phase]}" alt="${esc(r.author)}"></div><div><div class="kicker">YOUR STORY TYPE</div><div class="phase">${r.phase}</div><div class="chartTag">${esc(r.chartTag)}</div><div class="author">${esc(r.author)}</div>${diff?`<div class="detailTag">詳細資料の見出し：${esc(r.detailTag)}</div>`:''}<p class="desc">${esc(r.desc)}</p><div class="recTitle">オススメの物語</div><div class="recs">${r.recs.map(x=>`<span class="rec">『${esc(x)}』</span>`).join('')}</div></div></div><div class="resultBtns"><button class="xshare" onclick="shareX('${id}')">𝕏 で結果をシェア</button><button class="linkcopy" onclick="copyShareLink('${id}')">共有リンクをコピー</button><button class="primary" onclick="copyResult('${id}')">結果文をコピー</button><button class="secondary" onclick="startGame()">${shared?'あなたも診断する':'もう一度診断'}</button></div>${shared?'':`<details class="route"><summary>今回の回答ルート</summary>${routeHTML()}</details>`}<div class="allTypes"><h3>ALL 8 TYPES</h3>${castHTML('typeGrid')}</div><div class="note">※メインのキャッチコピーは診断チャート、説明文とおすすめ作品は詳細説明資料の表記を使用しています。</div>
+<div class="feedbackBox">
+  <details>
+    <summary>この診断への感想・改善案があれば</summary>
+    <div class="feedbackInner">
+      <p>投稿したい方だけどうぞ。Xの投稿画面が開きます。<br>ハッシュタグ <strong>#WhosYourStory改善</strong> を付けて投稿できます。</p>
+      <button class="feedbackPost" onclick="postFeedback('${id}')">Xで感想・改善案を書く</button>
+    </div>
+  </details>
+</div>`;
+}
+function shareText(id){
+ const r=results[id];
+ return `WHO'S YOUR STORY?
+私は「${r.author}」でした。
+${r.phase} ${r.detailTag}
+
+あなたは宮崎駿？村上春樹？鳥山明？
+#作家タイプ診断 #WhosYourStory`;
+}
+function shareX(id){
+ const url=sharePageUrl(id);
+ const intent='https://twitter.com/intent/tweet?text='+encodeURIComponent(shareText(id))+'&url='+encodeURIComponent(url);
+ window.open(intent,'_blank','noopener,noreferrer');
+}
+async function copyShareLink(id){
+ const url=sharePageUrl(id);
+ try{await navigator.clipboard.writeText(url);alert('共有リンクをコピーしました');}
+ catch(e){prompt('このリンクをコピーしてください',url);}
+}
+async function copyResult(id){
+ const r=results[id];
+ const text=`WHO'S YOUR STORY?
+${r.phase} ${r.detailTag} ${r.author}
+${r.desc}`;
+ try{await navigator.clipboard.writeText(text);alert('結果文をコピーしました');}
+ catch(e){prompt('このテキストをコピーしてください',text);}
+}
+
+function postFeedback(id){
+  const r=results[id];
+  const text =
+    `WHO'S YOUR STORY? の感想・改善案\n` +
+    `診断結果：${r.phase} ${r.author}\n\n` +
+    `ここに感想や改善点を書いてください。\n\n` +
+    `#WhosYourStory改善`;
+  const url = cleanBaseUrl();
+  const intent =
+    'https://twitter.com/intent/tweet?text=' +
+    encodeURIComponent(text) +
+    '&url=' + encodeURIComponent(url);
+  window.open(intent,'_blank','noopener,noreferrer');
+}
+
+const initialResult=new URL(location.href).searchParams.get('result');
+if(initialResult && results[initialResult]){renderResult(initialResult,true);}else{startScreen();}
+</script>
+</body></html>
