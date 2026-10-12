@@ -184,7 +184,9 @@ function cleanBaseUrl(){
   return u.href.replace(/\/index\.html$/,'/');
 }
 function sharePageUrl(id){
-  return new URL(`share/${id}.html`, cleanBaseUrl()).href;
+  const u=new URL(cleanBaseUrl());
+  u.searchParams.set('result',id);
+  return u.href;
 }
 function renderResult(id,shared=false){
  const r=results[id];statusEl.textContent=shared?'SHARED RESULT':'RESULT';const diff=r.chartTag!==r.detailTag;
@@ -242,6 +244,8 @@ function postFeedback(id){
   window.open(intent,'_blank','noopener,noreferrer');
 }
 
-startScreen();
+const sharedResult=new URL(location.href).searchParams.get('result');
+if(sharedResult && Object.prototype.hasOwnProperty.call(results,sharedResult)) renderResult(sharedResult,true);
+else startScreen();
 </script>
 </body></html>
