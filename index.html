@@ -144,6 +144,7 @@ h1 .q{color:var(--gold)}
 }
 .feedbackPost:hover{filter:brightness(1.08)}
 
+.languageSwitch{display:flex;justify-content:center;gap:12px;margin-bottom:22px}.languageSwitch a{color:#e9ba52;border:1px solid #343d50;border-radius:999px;padding:9px 18px;text-decoration:none;font-weight:900;font-size:16px}
 </style>
 </head>
 <body>
@@ -166,7 +167,7 @@ function castHTML(cls='cast'){
 }
 function startScreen(){
  current='q1';history=[];statusEl.textContent='READY';
- screen.className='screen fade';screen.innerHTML=`<div class="hero"><div class="kicker">物語フェーズ診断ゲーム</div><h1>WHO'S YOUR <span class="q">STORY?</span></h1><div class="sub">あなたはどの作家タイプ？</div><p class="names">宮崎駿？ 村上春樹？ 鳥山明？</p><p class="lead">いくつかの問いに YES / NO で答えてください。あなたのものの見方に近い「作家タイプ」を、8つの物語フェーズから診断します。</p><button class="start" onclick="startGame()">診断をはじめる</button>${castHTML()}<div class="note">※これは物語フェーズモデルを使ったエンターテインメント診断です。心理検査・医学的評価ではありません。</div></div>`;
+ screen.className='screen fade';screen.innerHTML=`<div class="hero"><div class="languageSwitch" aria-label="Language"><a href="./" lang="ja">日本語</a><a href="ko/" lang="ko">한국어</a></div><div class="kicker">物語フェーズ診断ゲーム</div><h1>WHO'S YOUR <span class="q">STORY?</span></h1><div class="sub">あなたはどの作家タイプ？</div><p class="names">宮崎駿？ 村上春樹？ 鳥山明？</p><p class="lead">いくつかの問いに YES / NO で答えてください。あなたのものの見方に近い「作家タイプ」を、8つの物語フェーズから診断します。</p><button class="start" onclick="startGame()">診断をはじめる</button>${castHTML()}<div class="note">※これは物語フェーズモデルを使ったエンターテインメント診断です。心理検査・医学的評価ではありません。</div></div>`;
 }
 function startGame(){current='q1';history=[];renderQuestion();}
 function candidateHTML(ids){return `<div class="candidateStrip">`+resultOrder.map(id=>`<div class="mini ${ids.includes(id)?'alive':''}" title="${esc(results[id].author)}"><img src="${art[results[id].phase]}" alt=""></div>`).join('')+`</div>`;}
