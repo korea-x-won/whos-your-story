@@ -1,0 +1,875 @@
+{
+  "ja": {
+    "nodes": {
+      "q1": {
+        "text": "周囲と同じ行動をしていると安心する",
+        "yes": "qA2",
+        "no": "qB1"
+      },
+      "qA2": {
+        "text": "赤信号は、車がなくても待つ",
+        "yes": "qA3",
+        "no": "qB3"
+      },
+      "qA3": {
+        "text": "約束は絶対に守る",
+        "yes": "qA4",
+        "no": "qB4"
+      },
+      "qA4": {
+        "text": "ルールを破る人を見ると、気になる",
+        "yes": "r15",
+        "no": "r10"
+      },
+      "qB1": {
+        "text": "映画の分析や解釈が好き",
+        "yes": "qC1",
+        "no": "qB2"
+      },
+      "qB2": {
+        "text": "勝つためには、手段を選ばないこともある",
+        "yes": "qB3",
+        "no": "qA3"
+      },
+      "qB3": {
+        "text": "人生、頑張れば何とかなる",
+        "yes": "qB4",
+        "no": "qC4"
+      },
+      "qB4": {
+        "text": "勉強が分からない相手を見ると、イライラしちゃう",
+        "yes": "r25",
+        "no": "r20"
+      },
+      "qC1": {
+        "text": "「世界を変えたい」と思うことがある",
+        "yes": "qD1",
+        "no": "qC2"
+      },
+      "qC2": {
+        "text": "スポーツは、勝てなくてもOK",
+        "yes": "qC3",
+        "no": "qB3"
+      },
+      "qC3": {
+        "text": "10億円あったら、人生の問題はだいたい解決する",
+        "yes": "qB4",
+        "no": "qC4"
+      },
+      "qC4": {
+        "text": "やりたいことがある",
+        "yes": "r35",
+        "no": "r30"
+      },
+      "qD1": {
+        "text": "自分が幸せなら、それで十分",
+        "yes": "qC2",
+        "no": "qD2"
+      },
+      "qD2": {
+        "text": "嬉しい時、周りの人も嬉しいか気になる",
+        "yes": "qD3",
+        "no": "qC3"
+      },
+      "qD3": {
+        "text": "自分らしく生きることが、一番大切",
+        "yes": "qC4",
+        "no": "qD4"
+      },
+      "qD4": {
+        "text": "議論で勝つと、すっきりする",
+        "yes": "r40",
+        "no": "r45"
+      }
+    },
+    "results": {
+      "r10": {
+        "phase": "1.0",
+        "chartTag": "夢見る",
+        "detailTag": "夢見る",
+        "author": "イソップタイプ",
+        "desc": "世界を素直に信じ、人との関わりやさまざまな経験を通して、善悪や思いやりを学びながら少しずつ成長していきます。夢や憧れを育みながら人生を歩み始めます。",
+        "recs": [
+          "となりのトトロ",
+          "ナルニア国物語",
+          "星の王子さま"
+        ]
+      },
+      "r15": {
+        "phase": "1.5",
+        "chartTag": "信念を貫く",
+        "detailTag": "信念を貫く",
+        "author": "三島由紀夫タイプ",
+        "desc": "揺るぎない信念を持ち、その理想を胸に生きるタイプです。軸がはっきりしていて、迷いが少なく、困難や犠牲を受け入れる覚悟を持ち、行動に一貫性があります。",
+        "recs": [
+          "鬼滅の刃",
+          "走れメロス",
+          "金閣寺"
+        ]
+      },
+      "r20": {
+        "phase": "2.0",
+        "chartTag": "地元最高！",
+        "detailTag": "地元最高！",
+        "author": "宮藤官九郎タイプ",
+        "desc": "教えられた「正しさ」に少し距離を取りながら、それでも自分の味方や居場所を大切にする。立派さよりも、いま一緒に笑えること。それでも社会で活躍するため、努力し成長します。",
+        "recs": [
+          "木更津キャッツアイ",
+          "ウォーターボーイズ",
+          "蹴りたい背中"
+        ]
+      },
+      "r25": {
+        "phase": "2.5",
+        "chartTag": "勝つべくして、勝つ。",
+        "detailTag": "勝つべくして、勝つ。",
+        "author": "鳥山明タイプ",
+        "desc": "努力と能力によって人は成長し、成功できると信じています。社会のルールや評価基準を尊重し、競争の中で成果を上げ、自らの価値を証明していきます。",
+        "recs": [
+          "SLAM DUNK",
+          "Breaking Bad",
+          "老人と海"
+        ]
+      },
+      "r30": {
+        "phase": "3.0",
+        "chartTag": "さまよえる",
+        "detailTag": "さまよえる",
+        "author": "村上春樹タイプ",
+        "desc": "人生の成功や社会の正解を手に入れても、どこか満たされない。「何のために生きるのか」を探し続けます。哲学や文学を通して、自分の世界観を模索していきます。",
+        "recs": [
+          "ブラザーフッド",
+          "ねじまき鳥クロニクル",
+          "夜と霧"
+        ]
+      },
+      "r35": {
+        "phase": "3.5",
+        "chartTag": "航路は俺が決める！",
+        "detailTag": "航路は俺が決める！",
+        "author": "尾田栄一郎タイプ",
+        "desc": "誰かが用意した地図をなぞるより、まだ知らない世界を探索・創造することに心が躍ります。社会の正解や評価に縛られず、自分の好奇心と意志で進む道を選びます。失敗さえも新たな発見として楽しみながら、人生を切り拓いていきます。",
+        "recs": [
+          "ONE PIECE",
+          "嫌われる勇気",
+          "未生"
+        ]
+      },
+      "r40": {
+        "phase": "4.0",
+        "chartTag": "生きろ！",
+        "detailTag": "生きろ！",
+        "author": "宮崎駿タイプ",
+        "desc": "自分らしい生き方を見つけるだけでは満足できず、仲間と協力しながら「未来のために何ができるのか」を考えます。理想の実現に向けて行動します。",
+        "recs": [
+          "もののけ姫",
+          "君たちはどう生きるか",
+          "レ・ミゼラブル"
+        ]
+      },
+      "r45": {
+        "phase": "4.5",
+        "chartTag": "涅槃を見せよう",
+        "detailTag": "涅槃を見せよう",
+        "author": "神山健治タイプ",
+        "desc": "多様な価値観が共に生きられる道を探します。自分の価値観を絶対視せず、相手の価値観にも耳を傾け、対話を通じてより良い未来を築こうとします。",
+        "recs": [
+          "攻殻機動隊 S.A.C.",
+          "東のエデン",
+          "葬送のフリーレン",
+          "モモ"
+        ]
+      }
+    },
+    "reach": {
+      "q1": [
+        "r10",
+        "r15",
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qA2": [
+        "r10",
+        "r15",
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qA3": [
+        "r10",
+        "r15",
+        "r20",
+        "r25"
+      ],
+      "qA4": [
+        "r10",
+        "r15"
+      ],
+      "qB1": [
+        "r10",
+        "r15",
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qB2": [
+        "r10",
+        "r15",
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qB3": [
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qB4": [
+        "r20",
+        "r25"
+      ],
+      "qC1": [
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qC2": [
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qC3": [
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qC4": [
+        "r30",
+        "r35"
+      ],
+      "qD1": [
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qD2": [
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qD3": [
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qD4": [
+        "r40",
+        "r45"
+      ]
+    }
+  },
+  "ko": {
+    "nodes": {
+      "q1": {
+        "text": "주변 사람들과 같은 행동을 하면 마음이 편하다",
+        "yes": "qA2",
+        "no": "qB1"
+      },
+      "qA2": {
+        "text": "차가 없어도 빨간 신호에서는 기다린다",
+        "yes": "qA3",
+        "no": "qB3"
+      },
+      "qA3": {
+        "text": "약속은 반드시 지킨다",
+        "yes": "qA4",
+        "no": "qB4"
+      },
+      "qA4": {
+        "text": "규칙을 어기는 사람을 보면 신경이 쓰인다",
+        "yes": "r15",
+        "no": "r10"
+      },
+      "qB1": {
+        "text": "영화를 분석하거나 해석하는 것을 좋아한다",
+        "yes": "qC1",
+        "no": "qB2"
+      },
+      "qB2": {
+        "text": "이기기 위해서라면 수단과 방법을 가리지 않을 때도 있다",
+        "yes": "qB3",
+        "no": "qA3"
+      },
+      "qB3": {
+        "text": "인생은 열심히 노력하면 어떻게든 풀린다",
+        "yes": "qB4",
+        "no": "qC4"
+      },
+      "qB4": {
+        "text": "공부 내용을 이해하지 못하는 사람을 보면 짜증이 난다",
+        "yes": "r25",
+        "no": "r20"
+      },
+      "qC1": {
+        "text": "세상을 바꾸고 싶다는 생각을 할 때가 있다",
+        "yes": "qD1",
+        "no": "qC2"
+      },
+      "qC2": {
+        "text": "스포츠는 이기지 못해도 괜찮다",
+        "yes": "qC3",
+        "no": "qB3"
+      },
+      "qC3": {
+        "text": "10억 엔이 있으면 인생의 문제는 대부분 해결된다",
+        "yes": "qB4",
+        "no": "qC4"
+      },
+      "qC4": {
+        "text": "하고 싶은 일이 있다",
+        "yes": "r35",
+        "no": "r30"
+      },
+      "qD1": {
+        "text": "내가 행복하면 그것으로 충분하다",
+        "yes": "qC2",
+        "no": "qD2"
+      },
+      "qD2": {
+        "text": "기쁜 일이 생기면 주변 사람들도 기쁜지 신경이 쓰인다",
+        "yes": "qD3",
+        "no": "qC3"
+      },
+      "qD3": {
+        "text": "나답게 사는 것이 가장 중요하다",
+        "yes": "qC4",
+        "no": "qD4"
+      },
+      "qD4": {
+        "text": "논쟁에서 이기면 속이 시원하다",
+        "yes": "r40",
+        "no": "r45"
+      }
+    },
+    "results": {
+      "r10": {
+        "phase": "1.0",
+        "chartTag": "꿈꾸는 사람",
+        "detailTag": "꿈꾸는 사람",
+        "author": "이솝 타입",
+        "desc": "세상을 순수하게 믿으며, 사람들과의 관계와 다양한 경험을 통해 선악과 배려를 배우고 조금씩 성장하는 이야기가 당신에게 어울립니다. 꿈과 동경을 키우며 인생의 첫걸음을 내딛습니다.",
+        "recs": [
+          "이웃집 토토로",
+          "나니아 연대기",
+          "어린 왕자"
+        ]
+      },
+      "r15": {
+        "phase": "1.5",
+        "chartTag": "신념을 관철하다",
+        "detailTag": "신념을 관철하다",
+        "author": "미시마 유키오 타입",
+        "desc": "흔들리지 않는 신념을 품고, 자신의 이상을 끝까지 지켜 나가는 이야기가 당신에게 어울립니다. 삶의 기준이 분명하고 망설임이 적으며, 어려움과 희생을 받아들일 각오가 되어 있습니다. 주인공의 행동에도 일관성이 있습니다.",
+        "recs": [
+          "귀멸의 칼날",
+          "달려라 메로스",
+          "금각사"
+        ]
+      },
+      "r20": {
+        "phase": "2.0",
+        "chartTag": "우리 동네가 최고!",
+        "detailTag": "우리 동네가 최고!",
+        "author": "쿠도 칸쿠로 타입",
+        "desc": "배워 온 정답과 조금 거리를 두면서도, 내 편과 내가 속한 곳을 소중히 여깁니다. 훌륭해 보이는 것보다 지금 함께 웃는 것이 중요합니다. 그러면서도 사회에서 활약하기 위해 노력하고 성장합니다.",
+        "recs": [
+          "키사라즈 캐츠아이",
+          "워터보이즈",
+          "발로 차 주고 싶은 등짝"
+        ]
+      },
+      "r25": {
+        "phase": "2.5",
+        "chartTag": "이길 만하니까, 이긴다.",
+        "detailTag": "이길 만하니까, 이긴다.",
+        "author": "토리야마 아키라 타입",
+        "desc": "노력과 능력으로 성장하고 성공할 수 있다고 믿습니다. 사회의 규칙과 평가 기준을 존중하며, 경쟁 속에서 성과를 내고 자신의 가치를 증명해 나갑니다.",
+        "recs": [
+          "슬램덩크",
+          "브레이킹 배드",
+          "노인과 바다"
+        ]
+      },
+      "r30": {
+        "phase": "3.0",
+        "chartTag": "방황하는 사람",
+        "detailTag": "방황하는 사람",
+        "author": "무라카미 하루키 타입",
+        "desc": "성공과 사회가 제시하는 정답을 손에 넣어도 어딘가 채워지지 않는 당신. 무엇을 위해 살아야 하는지 끊임없이 탐색하는 작품이 어울립니다. 철학과 문학을 통해 자신만의 세계관을 모색해 나갑니다.",
+        "recs": [
+          "브라더후드",
+          "태엽 감는 새 연대기",
+          "죽음의 수용소에서"
+        ]
+      },
+      "r35": {
+        "phase": "3.5",
+        "chartTag": "내 항로는 내가 정한다!",
+        "detailTag": "내 항로는 내가 정한다!",
+        "author": "오다 에이치로 타입",
+        "desc": "누군가가 준비한 지도를 따라가기보다, 아직 모르는 세계를 탐색하고 창조하는 일에 가슴이 뜁니다. 사회의 정답과 평가에 얽매이지 않고 호기심과 의지로 자신의 길을 선택합니다. 실패도 새로운 발견으로 즐기며 삶을 개척합니다.",
+        "recs": [
+          "원피스",
+          "미움받을 용기",
+          "미생"
+        ]
+      },
+      "r40": {
+        "phase": "4.0",
+        "chartTag": "어쨌든, 살아라!",
+        "detailTag": "어쨌든, 살아라!",
+        "author": "미야자키 하야오 타입",
+        "desc": "나답게 사는 방법을 찾는 것만으로는 만족하지 않고, 동료들과 협력하며 미래를 위해 무엇을 할 수 있을지 생각하게 하는 이야기를 당신은 원합니다. 주인공은 힘들어도 이상을 실현하기 위해 행동합니다.",
+        "recs": [
+          "모노노케 히메",
+          "그대들은 어떻게 살 것인가",
+          "레 미제라블"
+        ]
+      },
+      "r45": {
+        "phase": "4.5",
+        "chartTag": "열반을 보고 싶다!",
+        "detailTag": "열반을 보고 싶다!",
+        "author": "카미야마 켄지 타입",
+        "desc": "당신은 다양한 가치관이 공존하는 이야기를 원합니다. 자신의 가치관만을 절대시하지 않고 상대의 가치관도 존중하며, 대화를 통해 더 나은 미래를 함께 만들어 가고자 합니다.",
+        "recs": [
+          "공각기동대 S.A.C.",
+          "동쪽의 에덴",
+          "장송의 프리렌",
+          "모모"
+        ]
+      }
+    },
+    "reach": {
+      "q1": [
+        "r10",
+        "r15",
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qA2": [
+        "r10",
+        "r15",
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qA3": [
+        "r10",
+        "r15",
+        "r20",
+        "r25"
+      ],
+      "qA4": [
+        "r10",
+        "r15"
+      ],
+      "qB1": [
+        "r10",
+        "r15",
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qB2": [
+        "r10",
+        "r15",
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qB3": [
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qB4": [
+        "r20",
+        "r25"
+      ],
+      "qC1": [
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qC2": [
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qC3": [
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qC4": [
+        "r30",
+        "r35"
+      ],
+      "qD1": [
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qD2": [
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qD3": [
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qD4": [
+        "r40",
+        "r45"
+      ]
+    }
+  },
+  "en": {
+    "nodes": {
+      "q1": {
+        "text": "I feel reassured when I do what others around me are doing.",
+        "yes": "qA2",
+        "no": "qB1"
+      },
+      "qA2": {
+        "text": "I wait at a red light even when there are no cars.",
+        "yes": "qA3",
+        "no": "qB3"
+      },
+      "qA3": {
+        "text": "I always keep my promises, no matter what.",
+        "yes": "qA4",
+        "no": "qB4"
+      },
+      "qA4": {
+        "text": "It bothers me when people break the rules.",
+        "yes": "r15",
+        "no": "r10"
+      },
+      "qB1": {
+        "text": "I enjoy analyzing and interpreting films.",
+        "yes": "qC1",
+        "no": "qB2"
+      },
+      "qB2": {
+        "text": "Sometimes I am willing to use any means necessary to win.",
+        "yes": "qB3",
+        "no": "qA3"
+      },
+      "qB3": {
+        "text": "If I work hard, things will work out somehow.",
+        "yes": "qB4",
+        "no": "qC4"
+      },
+      "qB4": {
+        "text": "I get frustrated when someone struggles to understand what they are studying.",
+        "yes": "r25",
+        "no": "r20"
+      },
+      "qC1": {
+        "text": "Sometimes I want to change the world.",
+        "yes": "qD1",
+        "no": "qC2"
+      },
+      "qC2": {
+        "text": "It is okay to play sports even if I do not win.",
+        "yes": "qC3",
+        "no": "qB3"
+      },
+      "qC3": {
+        "text": "Having one billion yen would solve most of my problems in life.",
+        "yes": "qB4",
+        "no": "qC4"
+      },
+      "qC4": {
+        "text": "There is something I want to do with my life.",
+        "yes": "r35",
+        "no": "r30"
+      },
+      "qD1": {
+        "text": "As long as I am happy, that is enough.",
+        "yes": "qC2",
+        "no": "qD2"
+      },
+      "qD2": {
+        "text": "When I am happy, I wonder whether the people around me are happy too.",
+        "yes": "qD3",
+        "no": "qC3"
+      },
+      "qD3": {
+        "text": "Living in my own way is the most important thing.",
+        "yes": "qC4",
+        "no": "qD4"
+      },
+      "qD4": {
+        "text": "Winning an argument feels satisfying.",
+        "yes": "r40",
+        "no": "r45"
+      }
+    },
+    "results": {
+      "r10": {
+        "phase": "1.0",
+        "chartTag": "Dreaming",
+        "detailTag": "Dreaming",
+        "author": "Aesop type",
+        "desc": "You trust the world with an open heart. Through relationships and new experiences, you gradually learn about right and wrong and compassion. You begin your journey through life, nurturing your dreams and aspirations.",
+        "recs": [
+          "My Neighbor Totoro",
+          "The Chronicles of Narnia",
+          "The Little Prince"
+        ]
+      },
+      "r15": {
+        "phase": "1.5",
+        "chartTag": "Standing by your beliefs",
+        "detailTag": "Standing by your beliefs",
+        "author": "Yukio Mishima type",
+        "desc": "You live by unwavering beliefs and hold your ideals close. With a clear inner compass and little hesitation, you are prepared to face hardship and sacrifice. Your actions consistently reflect your convictions.",
+        "recs": [
+          "Demon Slayer",
+          "Run, Melos!",
+          "The Temple of the Golden Pavilion"
+        ]
+      },
+      "r20": {
+        "phase": "2.0",
+        "chartTag": "My people, my place!",
+        "detailTag": "My people, my place!",
+        "author": "Kankuro Kudo type",
+        "desc": "You question some of the ideas of right and wrong you were taught, while cherishing the people on your side and the place where you belong. Sharing laughter now matters more than looking impressive. You still strive to grow and make your way in society.",
+        "recs": [
+          "Kisarazu Cat’s Eye",
+          "Waterboys",
+          "I Want to Kick You in the Back"
+        ]
+      },
+      "r25": {
+        "phase": "2.5",
+        "chartTag": "Playing to win",
+        "detailTag": "Playing to win",
+        "author": "Akira Toriyama type",
+        "desc": "You believe people can grow and succeed through effort and ability. You respect society’s rules and standards, achieve results through competition, and prove your worth through what you accomplish.",
+        "recs": [
+          "SLAM DUNK",
+          "Breaking Bad",
+          "The Old Man and the Sea"
+        ]
+      },
+      "r30": {
+        "phase": "3.0",
+        "chartTag": "Searching for meaning",
+        "detailTag": "Searching for meaning",
+        "author": "Haruki Murakami type",
+        "desc": "Even with success and society’s approval, something feels missing. You keep asking what makes life worth living. Through philosophy and literature, you search for a worldview of your own.",
+        "recs": [
+          "Brotherhood",
+          "The Wind-Up Bird Chronicle",
+          "Man’s Search for Meaning"
+        ]
+      },
+      "r35": {
+        "phase": "3.5",
+        "chartTag": "I chart my own course!",
+        "detailTag": "I chart my own course!",
+        "author": "Eiichiro Oda type",
+        "desc": "Exploring and creating an unknown world excites you more than following someone else’s map. Guided by curiosity and determination rather than society’s answers or approval, you choose your own path. Even failure becomes a discovery as you make your way through life.",
+        "recs": [
+          "ONE PIECE",
+          "The Courage to Be Disliked",
+          "Misaeng"
+        ]
+      },
+      "r40": {
+        "phase": "4.0",
+        "chartTag": "Live!",
+        "detailTag": "Live!",
+        "author": "Hayao Miyazaki type",
+        "desc": "Finding your own way to live is not enough. Working with others, you ask what you can do for the future. You take action to make your ideals a reality.",
+        "recs": [
+          "Princess Mononoke",
+          "The Boy and the Heron",
+          "Les Misérables"
+        ]
+      },
+      "r45": {
+        "phase": "4.5",
+        "chartTag": "A path to harmony",
+        "detailTag": "A path to harmony",
+        "author": "Kenji Kamiyama type",
+        "desc": "You seek a way for diverse values to coexist. Rather than treating your own worldview as absolute, you listen to others and work through dialogue to build a better future together.",
+        "recs": [
+          "Ghost in the Shell: Stand Alone Complex",
+          "Eden of the East",
+          "Frieren: Beyond Journey’s End",
+          "Momo"
+        ]
+      }
+    },
+    "reach": {
+      "q1": [
+        "r10",
+        "r15",
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qA2": [
+        "r10",
+        "r15",
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qA3": [
+        "r10",
+        "r15",
+        "r20",
+        "r25"
+      ],
+      "qA4": [
+        "r10",
+        "r15"
+      ],
+      "qB1": [
+        "r10",
+        "r15",
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qB2": [
+        "r10",
+        "r15",
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qB3": [
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qB4": [
+        "r20",
+        "r25"
+      ],
+      "qC1": [
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qC2": [
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qC3": [
+        "r20",
+        "r25",
+        "r30",
+        "r35"
+      ],
+      "qC4": [
+        "r30",
+        "r35"
+      ],
+      "qD1": [
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qD2": [
+        "r20",
+        "r25",
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qD3": [
+        "r30",
+        "r35",
+        "r40",
+        "r45"
+      ],
+      "qD4": [
+        "r40",
+        "r45"
+      ]
+    }
+  }
+}
