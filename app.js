@@ -11,7 +11,9 @@ const t=i=>words[i];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const originalCharacter=id=>new URL(`assets/original-characters/${id}.webp`,base).href;
 const asset=(id,portrait=false)=>new URL(`assets/${portrait?'portraits':'result-cards'}/${gender}/${id}.jpg`,base).href;
-const cardAsset=id=>new URL(`assets/result-cards/${gender}/${id}.jpg`,base).href;
+const koreanMaleCards={r10:'file_000000001c5c8209bbe3b0d8ae547e5f.png',r15:'file_00000000ca748209b1e617477eddfcd9.png',r20:'file_00000000b280820995d75f911fc9b6b2.png',r25:'file_00000000d9548209a0eccb83d50d49b1.png',r30:'file_000000003c7c8209b086ede5f998ace3.png',r35:'file_00000000f96c8209bf01f3b001007bba.png',r40:'file_000000006d1482098ea4a963f9f4b769.png',r45:'file_0000000083d48209a64675fe7153ef8b.png'};
+const cardAsset=id=>new URL(lang==='ko'&&gender==='male'?'assets/result-cards/ko/male/'+koreanMaleCards[id]:'assets/result-cards/'+gender+'/'+id+'.jpg',base).href;
+const cardExtension=id=>lang==='ko'&&gender==='male'&&koreanMaleCards[id]?'png':'jpg';
 const entry=l=>new URL(l==='ja'?'./':`${l}/`,base);
 function sharePageUrl(id){return new URL(`${lang==='ja'?'':lang+'/'}share/${gender}/${id}.html`,base).href;}
 function languageLink(l){const u=entry(l);u.searchParams.set('character',gender);return u.href;}
@@ -37,7 +39,7 @@ function resultText(id){const r=resultFor(id);return `WHO'S YOUR STORY?\n${r.pha
 
 function shareX(id){window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(`WHO'S YOUR STORY?\n${resultFor(id).phase} ${resultFor(id).detailTag}\n${resultFor(id).author}\n#WhosYourStory`)+'&url='+encodeURIComponent(sharePageUrl(id)),'_blank','noopener,noreferrer');}
 async function copyText(text){try{await navigator.clipboard.writeText(text);alert(t(20));}catch(e){prompt(t(21),text);}}
-async function saveResultImage(id){try{const response=await fetch(cardAsset(id));if(!response.ok)throw Error();const url=URL.createObjectURL(await response.blob());const link=document.createElement('a');link.href=url;link.download='whos-your-story-'+gender+'-'+lang+'-'+id+'.jpg';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}catch(e){alert(t(22));}}
+async function saveResultImage(id){try{const response=await fetch(cardAsset(id));if(!response.ok)throw Error();const url=URL.createObjectURL(await response.blob());const link=document.createElement('a');link.href=url;link.download='whos-your-story-'+gender+'-'+lang+'-'+id+'.'+cardExtension(id);document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}catch(e){alert(t(22));}}
 fetch(new URL('game-data.json',base)).then(r=>{if(!r.ok)throw Error();return r.json();}).then(d=>{data=d;({nodes,results,reach}=data[lang]);const id=params.get('result');if(ids.includes(id))renderResult(id,true);else startScreen();}).catch(()=>{screen.textContent={ja:'読み込めませんでした。再読み込みしてください。',ko:'불러오지 못했습니다. 새로고침해 주세요.',en:'Could not load the quiz. Please reload.'}[lang];});
 
 function postFeedback(id){const text={ja:'ご意見・改善提案',ko:'의견·개선 제안',en:'Feedback and suggestions'}[lang];window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent("WHO'S YOUR STORY? "+text+'\n'+resultFor(id).author+'\n#WhosYourStoryFeedback')+'&url='+encodeURIComponent(languageLink(lang)),'_blank','noopener,noreferrer');}
