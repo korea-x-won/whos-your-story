@@ -76,10 +76,10 @@ function renderResult(id,shared=false){
   ? '<figure class="resultCard"><a href="'+asset(id)+'" target="_blank" rel="noopener"><img src="'+asset(id)+'" alt="'+esc(r.phase+' '+r.author+' '+r.desc)+'"></a></figure>'
   : '<figure class="resultCard"><a id="localizedCardLink" href="'+asset(id,true)+'" target="_blank" rel="noopener"><img id="localizedCardImage" src="'+asset(id,true)+'" alt="'+esc(r.phase+' '+r.author+' '+r.desc)+'"></a></figure>';
  screen.innerHTML=(shared?'<div class="sharedBadge">'+t(19)+'</div>':'')+cardMarkup+
- '<div class="resultBtns"><button class="xshare" onclick="shareX(\\''+id+'\\')">'+t(14)+'</button><button class="linkcopy" onclick="saveResultImage(\\''+id+'\\')">'+t(15)+'</button><button class="linkcopy" onclick="copyText(sharePageUrl(\\''+id+'\\'))">'+t(16)+'</button><button class="primary" onclick="copyText(resultText(\\''+id+'\\'))">'+t(17)+'</button><button class="secondary" onclick="startGame()">'+t(18)+'</button><button class="secondary" onclick="startScreen()">'+t(10)+'</button></div>'+
+ '<div class="resultBtns"><button class="xshare" onclick="shareX(\''+id+'\')">'+t(14)+'</button><button class="linkcopy" onclick="saveResultImage(\''+id+'\')">'+t(15)+'</button><button class="linkcopy" onclick="copyText(sharePageUrl(\''+id+'\'))">'+t(16)+'</button><button class="primary" onclick="copyText(resultText(\''+id+'\'))">'+t(17)+'</button><button class="secondary" onclick="startGame()">'+t(18)+'</button><button class="secondary" onclick="startScreen()">'+t(10)+'</button></div>'+
  (shared?'':'<details class="route"><summary>'+t(11)+'</summary>'+routeHTML()+'</details>')+
  '<div class="allTypes"><h3>ALL 8 TYPES</h3>'+castHTML('typeGrid')+'</div>'+
- '<div class="feedbackBox"><button class="feedbackPost" onclick="postFeedback(\\''+id+'\\')">'+{ja:'Xでご意見・改善提案',ko:'X에 의견·개선 제안 쓰기',en:'Share feedback on X'}[lang]+'</button></div>';
+ '<div class="feedbackBox"><button class="feedbackPost" onclick="postFeedback(\''+id+'\')">'+{ja:'Xでご意見・改善提案',ko:'X에 의견·개선 제안 쓰기',en:'Share feedback on X'}[lang]+'</button></div>';
  if(lang!=='ja')localizedCardDataURL(id).then(url=>{const image=document.getElementById('localizedCardImage'),link=document.getElementById('localizedCardLink');if(image)image.src=url;if(link)link.href=url;}).catch(()=>{});
 }
 function resultText(id){const r=resultFor(id);return `WHO'S YOUR STORY?\n${r.phase} ${r.detailTag}\n${r.author}\n${r.desc}`;}
