@@ -16,7 +16,8 @@ const koreanCards={
   female:{r10:'file_00000000c9dc8209aa5e75761d64a3a3.png',r15:'file_000000005abc8209815c7d4fead43ad4.png',r20:'file_00000000bb708209922c50a3f6c1d2dc.png',r25:'file_0000000075d88209a6cd8b33c601824b.png',r30:'file_00000000225c8209826198a3d4aae1f6.png',r35:'file_00000000843c820991427853b1248879.png',r40:'file_000000002eb48209a9f3b48e2a4325f9.png',r45:'file_00000000bdfc8209b5ce8a1e423f86e7.png'}
 };
 const englishMaleCards={r10:'file_000000009db482098d2223c7a8ba2f30.png',r15:'file_00000000bd2c8209a4e0b407db7c6ff5.png',r20:'file_00000000d82c8209ae807d2971db22ed.png',r25:'file_000000006e548209bceee67632ca23d3.png',r30:'file_000000006a04820996b85680a54bff91.png',r35:'file_0000000013e88209a1f33f9750fe30e3.png',r40:'file_0000000040c082099cd1fbd25707a09c.png',r45:'file_0000000014c88209a6e29465b28abd14.png'};
-const localizedCard=id=>lang==='ko'?koreanCards[gender][id]:lang==='en'&&gender==='male'?englishMaleCards[id]:null;
+const englishFemaleCards={r10:'file_00000000cfe08209af30e2bef6c6e29b.png',r15:'file_00000000a9ac82099f64f6c2bcf71de3.png',r20:'file_00000000626882099c3a06aa3952ffb2.png',r25:'file_00000000583882098eb95fa79131aebc.png',r30:'file_00000000b198820987bbf7bb1c0d20b3.png',r35:'file_00000000ca7c82099562006c4153d34a.png',r40:'file_0000000005f08209b05e77adb3fec20d.png',r45:'file_00000000b9d482099cce68d4c7eaea21.png'};
+const localizedCard=id=>lang==='ko'?koreanCards[gender][id]:lang==='en'?(gender==='male'?englishMaleCards[id]:englishFemaleCards[id]):null;
 const cardAsset=id=>{const file=localizedCard(id);return new URL(file?'assets/result-cards/'+lang+'/'+gender+'/'+file:'assets/result-cards/'+gender+'/'+id+'.jpg',base).href;};
 const cardExtension=id=>localizedCard(id)?'png':'jpg';
 const entry=l=>new URL(l==='ja'?'./':`${l}/`,base);
