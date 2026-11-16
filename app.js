@@ -11,7 +11,7 @@ const t=i=>words[i];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const originalCharacter=id=>new URL(`assets/original-characters/${id}.webp`,base).href;
 const asset=(id,portrait=false)=>new URL(`assets/${portrait?'portraits':'result-cards'}/${gender}/${id}.jpg`,base).href;
-const cardAsset=id=>new URL(lang==='ja'?`assets/result-cards/${gender}/${id}.jpg`:lang==='ko'?`ko/share_cards/${id}.jpg`:`share_cards/${id}.jpg`,base).href;
+const cardAsset=id=>new URL(`assets/result-cards/${gender}/${id}.jpg`,base).href;
 const entry=l=>new URL(l==='ja'?'./':`${l}/`,base);
 function sharePageUrl(id){return new URL(`${lang==='ja'?'':lang+'/'}share/${gender}/${id}.html`,base).href;}
 function languageLink(l){const u=entry(l);u.searchParams.set('character',gender);return u.href;}
