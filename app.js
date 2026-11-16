@@ -11,9 +11,12 @@ const t=i=>words[i];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const originalCharacter=id=>new URL(`assets/original-characters/${id}.webp`,base).href;
 const asset=(id,portrait=false)=>new URL(`assets/${portrait?'portraits':'result-cards'}/${gender}/${id}.jpg`,base).href;
-const koreanMaleCards={r10:'file_000000001c5c8209bbe3b0d8ae547e5f.png',r15:'file_00000000ca748209b1e617477eddfcd9.png',r20:'file_00000000b280820995d75f911fc9b6b2.png',r25:'file_00000000d9548209a0eccb83d50d49b1.png',r30:'file_000000003c7c8209b086ede5f998ace3.png',r35:'file_00000000f96c8209bf01f3b001007bba.png',r40:'file_000000006d1482098ea4a963f9f4b769.png',r45:'file_0000000083d48209a64675fe7153ef8b.png'};
-const cardAsset=id=>new URL(lang==='ko'&&gender==='male'?'assets/result-cards/ko/male/'+koreanMaleCards[id]:'assets/result-cards/'+gender+'/'+id+'.jpg',base).href;
-const cardExtension=id=>lang==='ko'&&gender==='male'&&koreanMaleCards[id]?'png':'jpg';
+const koreanCards={
+  male:{r10:'file_000000001c5c8209bbe3b0d8ae547e5f.png',r15:'file_00000000ca748209b1e617477eddfcd9.png',r20:'file_00000000b280820995d75f911fc9b6b2.png',r25:'file_00000000d9548209a0eccb83d50d49b1.png',r30:'file_000000003c7c8209b086ede5f998ace3.png',r35:'file_00000000f96c8209bf01f3b001007bba.png',r40:'file_000000006d1482098ea4a963f9f4b769.png',r45:'file_0000000083d48209a64675fe7153ef8b.png'},
+  female:{r10:'file_00000000c9dc8209aa5e75761d64a3a3.png',r15:'file_000000005abc8209815c7d4fead43ad4.png',r20:'file_00000000bb708209922c50a3f6c1d2dc.png',r25:'file_0000000075d88209a6cd8b33c601824b.png',r30:'file_00000000225c8209826198a3d4aae1f6.png',r35:'file_00000000843c820991427853b1248879.png',r40:'file_000000002eb48209a9f3b48e2a4325f9.png',r45:'file_00000000bdfc8209b5ce8a1e423f86e7.png'}
+};
+const cardAsset=id=>new URL(lang==='ko'&&koreanCards[gender][id]?'assets/result-cards/ko/'+gender+'/'+koreanCards[gender][id]:'assets/result-cards/'+gender+'/'+id+'.jpg',base).href;
+const cardExtension=id=>lang==='ko'&&koreanCards[gender][id]?'png':'jpg';
 const entry=l=>new URL(l==='ja'?'./':`${l}/`,base);
 function sharePageUrl(id){return new URL(`${lang==='ja'?'':lang+'/'}share/${gender}/${id}.html`,base).href;}
 function languageLink(l){const u=entry(l);u.searchParams.set('character',gender);return u.href;}
