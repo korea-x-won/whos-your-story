@@ -11,6 +11,7 @@ const t=i=>words[i];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const originalCharacter=id=>new URL(`assets/original-characters/${id}.webp`,base).href;
 const asset=(id,portrait=false)=>new URL(`assets/${portrait?'portraits':'result-cards'}/${gender}/${id}.jpg`,base).href;
+const cardAsset=id=>new URL(lang==='ja'?`assets/result-cards/${gender}/${id}.jpg`:lang==='ko'?`ko/share_cards/${id}.jpg`:`share_cards/${id}.jpg`,base).href;
 const entry=l=>new URL(l==='ja'?'./':`${l}/`,base);
 function sharePageUrl(id){return new URL(`${lang==='ja'?'':lang+'/'}share/${gender}/${id}.html`,base).href;}
 function languageLink(l){const u=entry(l);u.searchParams.set('character',gender);return u.href;}
@@ -23,83 +24,20 @@ function renderQuestion(){const n=nodes[current],cand=reach[current];statusEl.te
 function answer(value){const next=nodes[current][value?'yes':'no'];history.push({id:current,answer:value});if(results[next])renderResult(next);else{current=next;renderQuestion();}}
 function undo(){if(history.length){current=history.pop().id;renderQuestion();}}
 function resultFor(id){const r={...results[id]};if(gender==='female'){if(id==='r15')r.recs=[r.recs[0],{ja:'若きウェルテルの悩み',ko:'젊은 베르테르의 슬픔',en:'The Sorrows of Young Werther'}[lang],r.recs[2]];if(id==='r25'){r.detailTag={ja:'はぁ？あんたバカァ？',ko:'뭐? 너 바보야?',en:'Huh? Are you kidding me?'}[lang];r.desc={ja:'困難を課題と捉え、努力や工夫によって成長できると信じます。挑戦や強いライバルとの出会いを楽しみ、自ら行動することで人生を切り拓いていきます。',ko:'어려움을 과제로 받아들이고, 노력과 궁리를 통해 성장할 수 있다고 믿습니다. 도전과 강한 라이벌과의 만남을 즐기며, 스스로 행동하여 삶을 개척합니다.',en:'You see difficulties as challenges and believe you can grow through effort and ingenuity. You enjoy taking on challenges and meeting strong rivals, shaping your life through your own actions.'}[lang];}}return r;}
-const localizedCardCache={};
-function wrapCardText(text,font,maxWidth,maxLines){
- const context=document.createElement('canvas').getContext('2d');context.font=font;
- const words=String(text).trim().split(/\s+/);let line='',lines=[];
- for(const word of words){const candidate=line?line+' '+word:word;if(context.measureText(candidate).width>maxWidth&&line){lines.push(line);line=word;}else line=candidate;}
- if(line)lines.push(line);
- if(lines.length>maxLines){lines=lines.slice(0,maxLines);lines[maxLines-1]=lines[maxLines-1].replace(/[.,;:!?，。！？]$/,'')+'…';}
- return lines;
-}
-function svgTextLines(lines,x,y,size,lineHeight,color,family,weight){
- return '<text x="'+x+'" y="'+y+'" fill="'+color+'" font-size="'+size+'" font-family="'+family+'" font-weight="'+weight+'">'+lines.map((line,i)=>'<tspan x="'+x+'" dy="'+(i?lineHeight:0)+'">'+esc(line)+'</tspan>').join('')+'</text>';
-}
-async function localizedCardDataURL(id){
- const key=lang+'-'+gender+'-'+id;if(localizedCardCache[key])return localizedCardCache[key];
- const response=await fetch(asset(id,true));if(!response.ok)throw Error('Portrait unavailable');
- const portraitBlob=await response.blob();
- const portraitData=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(portraitBlob);});
- const r=resultFor(id);
- const tagLines=wrapCardText(r.detailTag,'bold 36px system-ui',440,2);
- const authorLines=wrapCardText(r.author,'bold 34px system-ui',440,2);
- const descLines=wrapCardText(r.desc,'28px system-ui',650,5);
- const descY=375,descSvg=svgTextLines(descLines,78,descY,28,42,'#392d3d','system-ui, sans-serif',500);
- const recTitleY=descY+descLines.length*42+36;
- let recY=recTitleY+58;
- const recSvg=r.recs.map(title=>{
-  const lines=wrapCardText(title,'25px system-ui',630,2);
-  const y=recY;recY+=lines.length*33+8;
-  return '<path d="M78 '+(y-18)+' l16 10 -16 10 z" fill="#bc8f2c"/>'+svgTextLines(lines,112,y,25,33,'#3b2e3f','system-ui, sans-serif',600);
- }).join('');
- const svg='<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1536" height="1024" viewBox="0 0 1536 1024">'+
- '<defs><clipPath id="card"><rect x="10" y="10" width="1516" height="1004" rx="28"/></clipPath><linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf5e8"/><stop offset="1" stop-color="#eee2c9"/></linearGradient><linearGradient id="fade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#352442"/><stop offset="1" stop-color="#352442" stop-opacity="0"/></linearGradient></defs>'+
- '<g clip-path="url(#card)"><rect width="1536" height="1024" fill="url(#paper)"/>'+
- '<image x="760" y="0" width="776" height="1024" preserveAspectRatio="xMidYMid slice" href="'+portraitData+'" xlink:href="'+portraitData+'"/>'+
- '<path d="M0 0 H820 V235 C600 270 300 285 0 340 Z" fill="#352442"/>'+
- '<path d="M730 0 H820 V1024 H730 Z" fill="url(#fade)" opacity=".18"/>'+
- '<text x="68" y="70" fill="#f2d88e" font-size="28" font-family="Georgia,serif" font-style="italic" letter-spacing="4">STORY TYPE</text>'+
- '<text x="52" y="222" fill="#f2d88e" font-size="164" font-family="Georgia,serif" font-weight="700">'+esc(r.phase)+'</text>'+
- svgTextLines(tagLines,300,120,36,42,'#fbf5e8','Georgia, serif',700)+
- svgTextLines(authorLines,300,184,34,40,'#fbf5e8','system-ui, sans-serif',800)+
- '<path d="M76 306 V548" stroke="#b88a31" stroke-width="5"/>'+
- descSvg+
- '<rect x="60" y="'+(recTitleY-34)+'" width="430" height="46" rx="8" fill="#352442"/>'+
- '<text x="92" y="'+(recTitleY-3)+'" fill="#f2d88e" font-size="25" font-family="Georgia,serif" font-weight="700" letter-spacing="2">'+esc(t(13).toUpperCase())+'</text>'+
- recSvg+
- '</g><rect x="12" y="12" width="1512" height="1000" rx="28" fill="none" stroke="#c8a04c" stroke-width="12"/><rect x="28" y="28" width="1480" height="968" rx="20" fill="none" stroke="#f6df9a" stroke-width="3"/></svg>';
- const dataURL='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);localizedCardCache[key]=dataURL;return dataURL;
-}
 function renderResult(id,shared=false){
- const r=resultFor(id);statusEl.textContent='RESULT';
- const cardMarkup=lang==='ja'
-  ? '<figure class="resultCard"><a href="'+asset(id)+'" target="_blank" rel="noopener"><img src="'+asset(id)+'" alt="'+esc(r.phase+' '+r.author+' '+r.desc)+'"></a></figure>'
-  : '<figure class="resultCard"><a id="localizedCardLink" href="'+asset(id,true)+'" target="_blank" rel="noopener"><img id="localizedCardImage" src="'+asset(id,true)+'" alt="'+esc(r.phase+' '+r.author+' '+r.desc)+'"></a></figure>';
- screen.innerHTML=(shared?'<div class="sharedBadge">'+t(19)+'</div>':'')+cardMarkup+
+ const r=resultFor(id),card=cardAsset(id);statusEl.textContent='RESULT';
+ screen.innerHTML=(shared?'<div class="sharedBadge">'+t(19)+'</div>':'')+
+ '<figure class="resultCard"><a href="'+card+'" target="_blank" rel="noopener"><img src="'+card+'" alt="'+esc(r.phase+' '+r.author+' '+r.desc)+'"></a></figure>'+
  '<div class="resultBtns"><button class="xshare" onclick="shareX(\''+id+'\')">'+t(14)+'</button><button class="linkcopy" onclick="saveResultImage(\''+id+'\')">'+t(15)+'</button><button class="linkcopy" onclick="copyText(sharePageUrl(\''+id+'\'))">'+t(16)+'</button><button class="primary" onclick="copyText(resultText(\''+id+'\'))">'+t(17)+'</button><button class="secondary" onclick="startGame()">'+t(18)+'</button><button class="secondary" onclick="startScreen()">'+t(10)+'</button></div>'+
  (shared?'':'<details class="route"><summary>'+t(11)+'</summary>'+routeHTML()+'</details>')+
  '<div class="allTypes"><h3>ALL 8 TYPES</h3>'+castHTML('typeGrid')+'</div>'+
  '<div class="feedbackBox"><button class="feedbackPost" onclick="postFeedback(\''+id+'\')">'+{ja:'Xでご意見・改善提案',ko:'X에 의견·개선 제안 쓰기',en:'Share feedback on X'}[lang]+'</button></div>';
- if(lang!=='ja')localizedCardDataURL(id).then(url=>{const image=document.getElementById('localizedCardImage'),link=document.getElementById('localizedCardLink');if(image)image.src=url;if(link)link.href=url;}).catch(()=>{});
 }
 function resultText(id){const r=resultFor(id);return `WHO'S YOUR STORY?\n${r.phase} ${r.detailTag}\n${r.author}\n${r.desc}`;}
 
 function shareX(id){window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(`WHO'S YOUR STORY?\n${resultFor(id).phase} ${resultFor(id).detailTag}\n${resultFor(id).author}\n#WhosYourStory`)+'&url='+encodeURIComponent(sharePageUrl(id)),'_blank','noopener,noreferrer');}
 async function copyText(text){try{await navigator.clipboard.writeText(text);alert(t(20));}catch(e){prompt(t(21),text);}}
-async function saveResultImage(id){
- try{
-  if(lang==='ja'){
-   const response=await fetch(asset(id));if(!response.ok)throw Error();
-   const url=URL.createObjectURL(await response.blob()),link=document.createElement('a');
-   link.href=url;link.download='whos-your-story-'+gender+'-'+id+'.jpg';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);return;
-  }
-  const cardURL=await localizedCardDataURL(id),image=new Image();image.src=cardURL;await image.decode();
-  const canvas=document.createElement('canvas');canvas.width=1536;canvas.height=1024;
-  canvas.getContext('2d').drawImage(image,0,0,1536,1024);
-  const blob=await new Promise((resolve,reject)=>canvas.toBlob(value=>value?resolve(value):reject(Error()),'image/png'));
-  const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='whos-your-story-'+gender+'-'+lang+'-'+id+'.png';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
- }catch(e){alert(t(22));}
-}
+async function saveResultImage(id){try{const response=await fetch(cardAsset(id));if(!response.ok)throw Error();const url=URL.createObjectURL(await response.blob());const link=document.createElement('a');link.href=url;link.download='whos-your-story-'+gender+'-'+lang+'-'+id+'.jpg';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}catch(e){alert(t(22));}}
 fetch(new URL('game-data.json',base)).then(r=>{if(!r.ok)throw Error();return r.json();}).then(d=>{data=d;({nodes,results,reach}=data[lang]);const id=params.get('result');if(ids.includes(id))renderResult(id,true);else startScreen();}).catch(()=>{screen.textContent={ja:'読み込めませんでした。再読み込みしてください。',ko:'불러오지 못했습니다. 새로고침해 주세요.',en:'Could not load the quiz. Please reload.'}[lang];});
 
 function postFeedback(id){const text={ja:'ご意見・改善提案',ko:'의견·개선 제안',en:'Feedback and suggestions'}[lang];window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent("WHO'S YOUR STORY? "+text+'\n'+resultFor(id).author+'\n#WhosYourStoryFeedback')+'&url='+encodeURIComponent(languageLink(lang)),'_blank','noopener,noreferrer');}
